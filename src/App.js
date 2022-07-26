@@ -20,6 +20,15 @@ class App extends React.Component {
     };
   }
 
+  deleteClick = ({ target }) => {
+    const { deck } = this.state;
+    const findId = target.parentElement.id;
+    const newdeck = deck.filter((_element, index) => index !== Number(findId));
+    this.setState({ deck: newdeck });
+    const deckHasTrunfo = newdeck.some((item) => item.cardTrunfo);
+    this.setState({ hasTrunfo: deckHasTrunfo });
+  }
+
   onSaveButtonClick = (event) => {
     event.preventDefault();
     const { cardName, cardImage, cardDescription,
@@ -34,7 +43,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
     };
-    const superTrunfo = cardTrunfo;
+
     this.setState((prevState) => ({
       cardName: '',
       cardDescription: '',
@@ -45,8 +54,12 @@ class App extends React.Component {
       cardRare: 'normal',
       cardTrunfo: false,
       deck: [...prevState.deck, card],
-      hasTrunfo: superTrunfo,
-    }));
+      isSaveButtonDisabled: true,
+    }), () => {
+      const { deck } = this.state;
+      const deckHasTrunfo = deck.some((item) => item.cardTrunfo);
+      this.setState({ hasTrunfo: deckHasTrunfo });
+    });
   }
 
   onInputChange = ({ target }) => {
@@ -79,7 +92,20 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } />
-        {deck.map((card) => <Card { ...card } key={ card.cardName } />)}
+        {deck.map((card, index) => (
+          <div key={ index } id={ index }>
+            <Card
+              { ...card }
+            />
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={ this.deleteClick }
+            >
+              Excluir
+
+            </button>
+          </div>))}
       </div>
     );
   }

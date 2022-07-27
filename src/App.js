@@ -17,7 +17,12 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       deck: [],
+      filterName: '',
     };
+  }
+
+  setFilterNameValue = ({ target: { value } }) => {
+    this.setState({ filterName: value });
   }
 
   deleteClick = ({ target }) => {
@@ -81,7 +86,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { deck } = this.state;
+    const { deck, filterName } = this.state;
+    const deckFiltered = deck.filter(({ cardName }) => cardName.includes(filterName));
 
     return (
       <div>
@@ -92,7 +98,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } />
-        {deck.map((card, index) => (
+        {deckFiltered.map((card, index) => (
           <div key={ index } id={ index }>
             <Card
               { ...card }
@@ -106,6 +112,11 @@ class App extends React.Component {
 
             </button>
           </div>))}
+        <input
+          type="text"
+          data-testid="name-filter"
+          onChange={ this.setFilterNameValue }
+        />
       </div>
     );
   }

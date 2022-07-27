@@ -18,11 +18,19 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       deck: [],
       filterName: '',
+      filterRare: '',
+      filterTrunfo: false,
+      isDisable: false,
     };
   }
 
-  setFilterNameValue = ({ target: { value } }) => {
-    this.setState({ filterName: value });
+  setFilterValue = ({ target }) => {
+    const { name } = target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({ [name]: value }, () => {
+      const { filterTrunfo } = this.state;
+      this.setState({ isDisable: filterTrunfo });
+    });
   }
 
   deleteClick = ({ target }) => {
@@ -86,8 +94,13 @@ class App extends React.Component {
   }
 
   render() {
-    const { deck, filterName } = this.state;
-    const deckFiltered = deck.filter(({ cardName }) => cardName.includes(filterName));
+    const { deck, filterName, filterRare, filterTrunfo, isDisable } = this.state;
+    const deckName = deck.filter(({ cardName }) => cardName.includes(filterName));
+    const deckRare = filterRare !== ''
+      ? deckName.filter(({ cardRare }) => cardRare === filterRare)
+      : deckName;
+    const filterDeck = filterTrunfo
+      ? deckRare.filter(({ cardTrunfo }) => cardTrunfo) : deckRare;
 
     return (
       <div>
@@ -98,7 +111,7 @@ class App extends React.Component {
           onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card { ...this.state } />
-        {deckFiltered.map((card, index) => (
+        {filterDeck.map((card, index) => (
           <div key={ index } id={ index }>
             <Card
               { ...card }
@@ -112,11 +125,36 @@ class App extends React.Component {
 
             </button>
           </div>))}
-        <input
-          type="text"
-          data-testid="name-filter"
-          onChange={ this.setFilterNameValue }
-        />
+        <label htmlFor="name-filter">
+          <input
+            type="text"
+            name="filterName"
+            data-testid="name-filter"
+            disabled={ isDisable }
+            onChange={ this.setFilterValue }
+          />
+        </label>
+        <label htmlFor="rare-filter">
+          <select
+            name="filterRare"
+            data-testid="rare-filter"
+            disabled={ isDisable }
+            onChange={ this.setFilterValue }
+          >
+            <option value="">todas</option>
+            <option value="normal">normal</option>
+            <option value="raro">raro</option>
+            <option value="muito raro">muito raro</option>
+          </select>
+        </label>
+        <label htmlFor="trunfo-filter">
+          <input
+            type="checkbox"
+            data-testid="trunfo-filter"
+            name="filterTrunfo"
+            onChange={ this.setFilterValue }
+          />
+        </label>
       </div>
     );
   }

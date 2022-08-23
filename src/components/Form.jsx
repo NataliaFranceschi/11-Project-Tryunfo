@@ -17,8 +17,9 @@ class Form extends React.Component {
       onSaveButtonClick } = this.props;
 
     return (
-      <div>
+      <div className="divForm">
         <form className="form">
+          <legend>Adicionar nova carta</legend>
           <label htmlFor="name">
             Nome
             <input
@@ -36,8 +37,8 @@ class Form extends React.Component {
               name="cardDescription"
               value={ cardDescription }
               onChange={ onInputChange }
-              cols="30"
-              rows="10"
+              cols="20"
+              rows="5"
             />
           </label>
           <label htmlFor="attr1">

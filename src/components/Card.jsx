@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SuperTrunfo from './SuperTrunfo.png';
 
 class Card extends React.Component {
   render() {
@@ -13,26 +14,45 @@ class Card extends React.Component {
       cardTrunfo } = this.props;
 
     return (
-      <div>
-        <div>
-          <h2 data-testid="name-card">{cardName}</h2>
-          <img data-testid="image-card" src={ cardImage } alt={ cardName } />
-          <p data-testid="description-card">{cardDescription}</p>
-          <p data-testid="rare-card">{cardRare}</p>
+      <div className="border">
+        <div className="card">
+          <h2 className="name" data-testid="name-card">{cardName}</h2>
           {
-            cardTrunfo ? <p data-testid="trunfo-card">Super Trunfo</p> : <p />
+            cardTrunfo ? <img
+              data-testid="trunfo-card"
+              className="trunfo-card"
+              src={ SuperTrunfo }
+              alt="SuperTrunfo"
+            /> : null
           }
-        </div>
-        <div>
-          <span data-testid="attr1-card">
-            { cardAttr1 }
-          </span>
-          <span data-testid="attr2-card">
-            { cardAttr2 }
-          </span>
-          <span data-testid="attr3-card">
-            { cardAttr3 }
-          </span>
+          <img
+            className="image"
+            data-testid="image-card"
+            src={ cardImage }
+            alt={ cardName }
+          />
+          <p className="rare" data-testid="rare-card">{cardRare}</p>
+          <p
+            className="description"
+            data-testid="description-card"
+          >
+            {cardDescription}
+
+          </p>
+          <div className="attr">
+            <span data-testid="attr1-card">
+              Attr1 ..............................................
+              { cardAttr1 }
+            </span>
+            <span data-testid="attr2-card">
+              Attr2 ..............................................
+              { cardAttr2 }
+            </span>
+            <span data-testid="attr3-card">
+              Attr3 ..............................................
+              { cardAttr3 }
+            </span>
+          </div>
         </div>
       </div>
     );

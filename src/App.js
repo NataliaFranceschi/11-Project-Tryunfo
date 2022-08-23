@@ -95,7 +95,8 @@ class App extends React.Component {
 
   render() {
     const { deck, filterName, filterRare, filterTrunfo, isDisable } = this.state;
-    const deckName = deck.filter(({ cardName }) => cardName.includes(filterName));
+    const deckName = deck.filter(({ cardName }) => cardName.toLowerCase()
+      .includes(filterName.toLowerCase()));
     const deckRare = filterRare !== ''
       ? deckName.filter(({ cardRare }) => cardRare === filterRare)
       : deckName;
@@ -104,57 +105,68 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <Form
-          { ...this.state }
-          onInputChange={ this.onInputChange }
-          onSaveButtonClick={ this.onSaveButtonClick }
-        />
-        <Card { ...this.state } />
-        {filterDeck.map((card, index) => (
-          <div key={ index } id={ index }>
-            <Card
-              { ...card }
-            />
-            <button
-              type="button"
-              data-testid="delete-button"
-              onClick={ this.deleteClick }
+        <div className="body">
+          <Form
+            { ...this.state }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
+          <div className="cardView">
+            <Card { ...this.state } />
+          </div>
+        </div>
+        <div className="search">
+          <div className="filter">
+            <h2>Todas as cartas</h2>
+            Filtros de Busca
+            <label htmlFor="name-filter">
+              <input
+                type="text"
+                name="filterName"
+                data-testid="name-filter"
+                disabled={ isDisable }
+                onChange={ this.setFilterValue }
+                placeholder="Nome da carta"
+              />
+            </label>
+            <select
+              name="filterRare"
+              data-testid="rare-filter"
+              disabled={ isDisable }
+              onChange={ this.setFilterValue }
             >
-              Excluir
+              <option value="">Raridade</option>
+              <option value="normal">Normal</option>
+              <option value="raro">Raro</option>
+              <option value="muito raro">Muito Raro</option>
+            </select>
+            <label htmlFor="trunfo-filter">
+              Super Trybe Trunfo
+              <input
+                type="checkbox"
+                data-testid="trunfo-filter"
+                name="filterTrunfo"
+                onChange={ this.setFilterValue }
+              />
+            </label>
+          </div>
+          <div className="filterCard">
+            {filterDeck.map((card, index) => (
+              <div className="deckCard" key={ index } id={ index }>
+                <Card
+                  { ...card }
+                />
+                <button
+                  type="button"
+                  data-testid="delete-button"
+                  onClick={ this.deleteClick }
+                >
+                  Excluir
 
-            </button>
-          </div>))}
-        <label htmlFor="name-filter">
-          <input
-            type="text"
-            name="filterName"
-            data-testid="name-filter"
-            disabled={ isDisable }
-            onChange={ this.setFilterValue }
-          />
-        </label>
-        <label htmlFor="rare-filter">
-          <select
-            name="filterRare"
-            data-testid="rare-filter"
-            disabled={ isDisable }
-            onChange={ this.setFilterValue }
-          >
-            <option value="">todas</option>
-            <option value="normal">normal</option>
-            <option value="raro">raro</option>
-            <option value="muito raro">muito raro</option>
-          </select>
-        </label>
-        <label htmlFor="trunfo-filter">
-          <input
-            type="checkbox"
-            data-testid="trunfo-filter"
-            name="filterTrunfo"
-            onChange={ this.setFilterValue }
-          />
-        </label>
+                </button>
+              </div>))}
+          </div>
+        </div>
       </div>
     );
   }

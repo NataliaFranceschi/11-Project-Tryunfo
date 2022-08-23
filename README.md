@@ -1,10 +1,11 @@
-# 🚧 README em construção 🚧
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+# Boas-vindas ao repositório do projeto Tryunfo!
+
+Projeto desenvolvido no curso da Trybe ao final do bloco 11* do Módulo 2 - Desenvolvimento Front-end.<br><br>
+*<strong>Bloco 11: Componentes com Estado, Eventos e Formulários com React</strong><br>
+ 11.1 - Componentes com estado e eventos<br>
+ 11.2 - Formulários no React<br>
+ 11.3 - Projeto - Tryunfo<br>
+ 
+ No projeto <strong>Tryunfo</strong> foi desenvolvido um formulário que após ser preenchido gera um carta tryunfo. As cartas salvas ficam disponíveis para visualização e podem ser filtradas pelo nome, raridade e Super Trybe Trunfo.<br>
+ 
+ ![tryunfo](Tryunfo.gif)

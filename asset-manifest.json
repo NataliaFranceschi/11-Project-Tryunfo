@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/11-Project-Tryunfo/static/css/main.9cd6a197.css",
+    "main.css": "/11-Project-Tryunfo/static/css/main.98aeaba1.css",
     "main.js": "/11-Project-Tryunfo/static/js/main.a638b590.js",
     "static/media/SuperTrunfo.png": "/11-Project-Tryunfo/static/media/SuperTrunfo.2f97f0153dc1b0f63491.png",
     "index.html": "/11-Project-Tryunfo/index.html",
-    "main.9cd6a197.css.map": "/11-Project-Tryunfo/static/css/main.9cd6a197.css.map",
+    "main.98aeaba1.css.map": "/11-Project-Tryunfo/static/css/main.98aeaba1.css.map",
     "main.a638b590.js.map": "/11-Project-Tryunfo/static/js/main.a638b590.js.map"
   },
   "entrypoints": [
-    "static/css/main.9cd6a197.css",
+    "static/css/main.98aeaba1.css",
     "static/js/main.a638b590.js"
   ]
 }
